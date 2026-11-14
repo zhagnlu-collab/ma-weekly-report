@@ -1,0 +1,25 @@
+{
+  "unattended": {
+    "_comment": "复制为 config/unattended.json 后用 --config 指定；全部字段均可省略，程序有默认值且自动探测。零交互运行不需要本文件。",
+    "_consumed_by": "auto_run.py 读取下列全部键；sources 段目前仅作入口登记说明，实际 URL 由 acquire_sources.py 内置常量定义。",
+    "soffice": "",
+    "fontconfig": "",
+    "max_pdf": 400,
+    "work_root": "",
+    "out_root": "",
+    "pdf_source_dir": "",
+    "publish_policy": "with-exceptions",
+    "retries": 1,
+    "timezone": "Asia/Shanghai",
+    "cutoff": "23:59:59",
+    "_sources_note": "官方入口变更时须同步修改 acquire_sources.py 并回归；不得把旧 API/分类码当作永不变更的依赖。",
+    "sources": {
+      "SSE_MOMENTUM": "https://query.sse.com.cn/commonExcelKcb.do?sqlId=GP_BGCZ_XMLB",
+      "SSE_COMMITTEE": "https://www.sse.com.cn/listing/announcement/commiteema/",
+      "SZSE_MOMENTUM": "https://www.szse.cn/api/ras/projectrends/query?bizType=3",
+      "CNINFO_FULLTEXT": "http://www.cninfo.com.cn/new/hisAnnouncement/query",
+      "BSE_MOMENTUM": "https://www.bse.cn/audit/t_project_news_r.html",
+      "CSRC_REGISTRATION": "https://www.csrc.gov.cn/"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "并购周报编写"
+  short_description: "输入截止日，自动检索、重算、编辑并交付并购周报完整成果包"
+  default_prompt: "使用 $ma-weekly-report，以 YYYY-MM-DD 为截止日，运行 python scripts/auto_run.py --as-of YYYY-MM-DD 一次调用到底，自动生成全套Excel、Word、PDF和PPT成果包；零提问、不中途等待确认或电脑操控，保留断点、完成分级门禁后原子发布；软门禁例外须随附《本期编制与待核说明》，不得冒称最终发布版。"
