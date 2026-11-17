@@ -1,0 +1,61 @@
+name: MCP / 数据源问题
+description: 报告 MCP、交易所页面、证监会或巨潮接口变化
+title: "[Data Source] "
+labels:
+  - data-source
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请勿提交真实密钥。查询参数、公司名称和公告信息如涉及敏感内容，请先脱敏。
+  - type: dropdown
+    id: source
+    attributes:
+      label: 数据源
+      options:
+        - Wind MCP
+        - 同花顺 iFinD MCP
+        - 见微公告检索
+        - 上交所
+        - 深交所
+        - 北交所
+        - 巨潮资讯
+        - 证监会
+        - 其他
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: 官方页面或工具名
+      description: 提供页面 URL、MCP server_type/tool_name；不要提供密钥。
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: 观察到的变化
+      description: 说明字段、错误码、页面结构或返回格式发生了什么变化。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 脱敏复现信息
+      description: 提供查询日期、脱敏参数、错误码和最小复现步骤。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 官方证据
+      description: 提供官方页面、公告链接或脱敏截图，并注明核验日期。
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 安全确认
+      options:
+        - label: 我已删除 MCP 密钥、账号凭证、客户信息和个人敏感信息
+          required: true

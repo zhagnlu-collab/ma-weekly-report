@@ -184,6 +184,16 @@ python3 scripts/auto_run.py --help
 - 已移除本机绝对路径和微信文件路径；`pdftoppm` 改为从 `PATH` 查找。
 - 本仓库不包含任何 MCP 密钥、API Key、账号密码或客户内部材料。
 
+## 参与贡献
+
+欢迎通过 Issue、Discussion 和 Pull Request 改进本 skill。外部贡献者请在 Fork 中修改并发起 PR，维护者审核通过后合并；`main` 分支不接受未经审核的直接推送。
+
+- 贡献流程与本地验证要求见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
+- 提交前请运行 `python3 scripts/validate_skill.py`。
+- 安全问题、密钥泄露或敏感数据风险请按 [`SECURITY.md`](SECURITY.md) 私下报告。
+- 参与讨论即表示同意遵守 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。
+- 不得在 Issue、PR、日志或测试文件中提交 MCP 密钥、客户信息、个人信息或未公开交易信息。
+
 ## 许可证
 
 本仓库未添加 `LICENSE` 文件，公开可见不构成开源许可或再分发授权。如需使用许可，请联系仓库所有者。
