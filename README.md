@@ -6,39 +6,77 @@
 
 > 本项目是个人工作流与研发成果，不代表任何机构的官方口径或法律意见。自动生成的成果均应按 `SKILL.md` 中的质量门禁复核，不得未经复核直接对外发布。
 
-## 适用场景
+## 修改教程：先 Fork，再 clone 自己的 Fork
 
-- 编制或更新 A 股并购重组周报。
-- 滚动维护重组底表、控制权变更、协议转让、IPO 终止、引战合作等 Excel。
-- 根据上期成果和本期公告生成 Word、PDF、PPT 完整成果包。
-- 复核已填数据与公告原文、交易所项目动态、证监会注册信息是否一致。
-- 在既有模板上保留格式、公式、图表和跨表勾稽关系。
+**先 Fork，再 clone 自己的 Fork，是提交修改最简单、最不容易出错的流程。**
 
-不适用于泛行业周报、单一并购案例研究或纯申报文件复核。
+Fork 就是在自己的 GitHub 账号下复制一份仓库；clone 就是把自己的这份仓库下载到电脑。改好后，通过 **Pull Request（简称 PR）** 请作者审核并接收修改。
 
-## 主要能力
+![从 Fork 到 PR 的七步流程](docs/images/fork-workflow.svg)
 
-- 按截止日自动推导期号、统计区间和上期模板。
-- 采集上交所、深交所、北交所、巨潮资讯、证监会等公开来源。
-- 建立公告检索台账、全文核实台账和事件状态记录。
-- 更新 **13 个 Excel 底表**，执行公式重算、跨表勾稽和标绿范围校验。
-- 生成 **WORD/PDF 周报、WORD/PDF 市场动态、PPT/PDF 市场周报**。
-- 通过质量门禁区分 `COMPLETE`、`COMPLETE_WITH_EXCEPTIONS` 和 `BLOCKED`。
-- 保留断点与运行状态，重复运行同一输入时可跳过已完成阶段。
+### 1. 先 Fork：复制到自己的账号
 
-## 交付物
+登录 GitHub，打开 [作者的仓库](https://github.com/zhagnlu-collab/ma-weekly-report)，点击右上角 **Fork**，再点击 **Create fork**。完成后，网页地址应变成 `github.com/你的用户名/ma-weekly-report`。
 
-一次完整运行通常生成：
+### 2. 再 clone：下载自己的 Fork
 
-- 13 个原生 Excel 工作簿；
-- 周报 Word、PDF；
-- 市场动态 Word、PDF；
-- 市场周报 PPT、PDF；
-- 检索台账、全文核实台账、指标快照和运行状态；
-- `validation-report.json` 等质量门禁文件；
-- 《本期编制与待核说明》（存在软门禁例外时）。
+电脑需要先安装 [Git](https://git-scm.com/downloads)。在**自己的 Fork 页面**点击绿色 **Code → HTTPS**，复制地址。打开终端（Windows 可用 Git Bash），运行：
 
-实际文件数量及目录以当期模板和运行结果为准。`COMPLETE_WITH_EXCEPTIONS` 表示结构已生成但仍有待核事项，不等同于内容已全部核实；`BLOCKED` 不视为可交付成果。
+```bash
+git clone https://github.com/YOUR-USERNAME/ma-weekly-report.git
+cd ma-weekly-report
+```
+
+把 `YOUR-USERNAME` 换成你的 GitHub 用户名；也可以直接用刚才复制的地址。后续命令都在这个文件夹里运行。
+
+### 3. 新建一个修改分支
+
+分支可以理解为“专门放这次修改的一条线”：
+
+```bash
+git switch -c my-change
+```
+
+### 4. 在这个文件夹里让 AI 修改
+
+用 AI Agent 打开刚刚 clone 的 `ma-weekly-report` 文件夹，告诉它要改什么。修改后的文件直接保存在这里。
+
+**如果你之前已经下载 ZIP，并让 AI 改过：** 把 ZIP 文件夹中改过的文件，按原目录结构复制进这个 clone 文件夹，再继续下面的步骤。只复制改动文件，不要复制 `.git`、`.env`、密钥、缓存、日志或临时文件。
+
+### 5. 检查改了什么
+
+```bash
+git status
+git diff
+python3 scripts/validate_skill.py
+```
+
+`git status` 列出改动文件，`git diff` 显示已跟踪文件的具体改动；新文件请直接打开检查。校验脚本需要 Python 3，Windows 中若使用 `python` 命令，请相应替换 `python3`。
+
+看到 `Skill contribution validation passed.` 表示仓库校验通过；再确认文件内容符合你的修改目的。
+
+### 6. 保存修改，并上传到自己的 Fork
+
+```bash
+git add .
+git commit -m "说明这次改了什么"
+git push -u origin my-change
+```
+
+`commit` 是在电脑上保存一条修改记录，`push` 是把它上传到自己的 GitHub Fork。首次提交若提示设置姓名和邮箱，按 Git 提示配置；上传若要求登录，按提示完成 GitHub 认证。
+
+### 7. 发起 PR，请作者接收修改
+
+回到自己的 Fork 页面，点击 **Compare & pull request**。如果没有看到按钮，可打开 **Pull requests → New pull request**，按需点击 **compare across forks**。核对：
+
+- **base repository / base**：`zhagnlu-collab/ma-weekly-report` 的 `main`；
+- **head repository / compare**：你自己的 `ma-weekly-report` 的 `my-change`。
+
+![PR 的接收仓库与提交分支示意](docs/images/pull-request-direction.svg)
+
+填写修改说明，点击 **Create pull request**，等待作者审核。后续需要补改时，在同一分支继续修改，再执行 `git add .`、`git commit` 和 `git push`，同一个 PR 会随之更新。
+
+**提交前：** 不要提交密码、密钥、客户资料、真实项目文件、个人信息或本机路径；请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。流程可参阅 [GitHub 官方贡献教程](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)。
 
 ## MCP 与数据能力
 
@@ -92,6 +130,41 @@ Wind MCP 的账号、授权、额度和调用方式以 [Wind 官方 MCP 服务](
 - [证监会并购重组注册信息](https://www.csrc.gov.cn/)。
 
 搜索引擎、微信公众号和新闻页面只能用于发现线索，关键金额、比例、主体、控制权及日期必须回到公告或官方页面核验。
+
+
+## 适用场景
+
+- 编制或更新 A 股并购重组周报。
+- 滚动维护重组底表、控制权变更、协议转让、IPO 终止、引战合作等 Excel。
+- 根据上期成果和本期公告生成 Word、PDF、PPT 完整成果包。
+- 复核已填数据与公告原文、交易所项目动态、证监会注册信息是否一致。
+- 在既有模板上保留格式、公式、图表和跨表勾稽关系。
+
+不适用于泛行业周报、单一并购案例研究或纯申报文件复核。
+
+## 主要能力
+
+- 按截止日自动推导期号、统计区间和上期模板。
+- 采集上交所、深交所、北交所、巨潮资讯、证监会等公开来源。
+- 建立公告检索台账、全文核实台账和事件状态记录。
+- 更新 **13 个 Excel 底表**，执行公式重算、跨表勾稽和标绿范围校验。
+- 生成 **WORD/PDF 周报、WORD/PDF 市场动态、PPT/PDF 市场周报**。
+- 通过质量门禁区分 `COMPLETE`、`COMPLETE_WITH_EXCEPTIONS` 和 `BLOCKED`。
+- 保留断点与运行状态，重复运行同一输入时可跳过已完成阶段。
+
+## 交付物
+
+一次完整运行通常生成：
+
+- 13 个原生 Excel 工作簿；
+- 周报 Word、PDF；
+- 市场动态 Word、PDF；
+- 市场周报 PPT、PDF；
+- 检索台账、全文核实台账、指标快照和运行状态；
+- `validation-report.json` 等质量门禁文件；
+- 《本期编制与待核说明》（存在软门禁例外时）。
+
+实际文件数量及目录以当期模板和运行结果为准。`COMPLETE_WITH_EXCEPTIONS` 表示结构已生成但仍有待核事项，不等同于内容已全部核实；`BLOCKED` 不视为可交付成果。
 
 ## 安装
 
@@ -183,67 +256,6 @@ python3 scripts/auto_run.py --help
 - 仅发布 `ma-weekly-report/` 的正式文件，不包含备份、缓存、周报原始 Excel、录制、项目记忆或本机日志。
 - 已移除本机绝对路径和微信文件路径；`pdftoppm` 改为从 `PATH` 查找。
 - 本仓库不包含任何 MCP 密钥、API Key、账号密码或客户内部材料。
-
-## 参与贡献：其他人如何修改这个 Skill
-
-普通 GitHub 用户不能直接修改作者的主仓库。正确方法是先 **Fork**（在自己的账号下复制一份），在电脑上修改，再发起 **Pull Request**（请求作者接收修改）。
-
-### 1. 复制仓库
-
-打开 `https://github.com/zhagnlu-collab/ma-weekly-report`，点击右上角 **Fork**。
-
-### 2. 下载自己的 Fork
-
-打开终端，运行：
-
-```bash
-git clone https://github.com/<你的GitHub用户名>/ma-weekly-report.git
-cd ma-weekly-report
-```
-
-### 3. 新建修改分支
-
-```bash
-git switch -c my-change
-```
-
-### 4. 复制 ZIP 中改过的文件
-
-在访达或文件资源管理器中同时打开：
-
-- ZIP 解压后的修改版文件夹；
-- 刚刚下载的 `ma-weekly-report` 文件夹。
-
-把 AI Agent 改过的文件按原目录结构复制到 `ma-weekly-report` 文件夹中。
-
-只复制修改过的文件，不要复制 `.env`、密钥、缓存、日志或临时文件。
-
-### 5. 本地检查
-
-```bash
-git status
-python3 scripts/validate_skill.py
-```
-
-`git status` 会显示刚才复制进来的修改。
-
-看到 `Skill contribution validation passed.` 就表示检查通过。
-
-### 6. 提交并上传
-
-```bash
-git add .
-git commit -m "我的修改说明"
-git push -u origin my-change
-```
-
-### 7. 发起 Pull Request
-
-回到自己的 GitHub Fork 页面，点击 **Compare & pull request**，填写修改说明，再点击 **Create pull request**。
-
-等待作者审核即可。后续如果还要修改，就在同一个分支继续执行 `git add .`、`git commit` 和 `git push`。
-
-**注意：** 不要提交密码、密钥、客户资料、真实项目文件、个人信息或本机路径。提交前请阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
 ## 许可证
 
