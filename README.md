@@ -184,16 +184,57 @@ python3 scripts/auto_run.py --help
 - 已移除本机绝对路径和微信文件路径；`pdftoppm` 改为从 `PATH` 查找。
 - 本仓库不包含任何 MCP 密钥、API Key、账号密码或客户内部材料。
 
-## 参与贡献
+## 参与贡献：其他人如何修改这个 Skill
 
-欢迎通过 Issue、Discussion 和 Pull Request 改进本 skill。外部贡献者请在 Fork 中修改并发起 PR，维护者审核通过后合并；`main` 分支不接受未经审核的直接推送。
+普通 GitHub 用户不能直接修改作者的主仓库。正确方法是先 **Fork**（在自己的账号下复制一份），在电脑上修改，再发起 **Pull Request**（请求作者接收修改）。
 
-- 贡献流程与本地验证要求见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
-- 第一次使用 GitHub 或需要完整的 Fork、分支、PR 教程，请阅读 [`docs/github-contribution-tutorial.md`](docs/github-contribution-tutorial.md)。
-- 提交前请运行 `python3 scripts/validate_skill.py`。
-- 安全问题、密钥泄露或敏感数据风险请按 [`SECURITY.md`](SECURITY.md) 私下报告。
-- 参与讨论即表示同意遵守 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。
-- 不得在 Issue、PR、日志或测试文件中提交 MCP 密钥、客户信息、个人信息或未公开交易信息。
+### 1. 复制仓库
+
+打开 `https://github.com/zhagnlu-collab/ma-weekly-report`，点击右上角 **Fork**。
+
+### 2. 下载自己的副本
+
+打开终端，运行：
+
+```bash
+git clone https://github.com/<你的GitHub用户名>/ma-weekly-report.git
+cd ma-weekly-report
+```
+
+### 3. 新建修改分支
+
+```bash
+git switch -c my-change
+```
+
+### 4. 修改文件
+
+用编辑器打开项目，修改需要的文件。
+
+### 5. 本地检查
+
+```bash
+python3 scripts/validate_skill.py
+```
+
+看到 `Skill contribution validation passed.` 就表示检查通过。
+
+### 6. 提交并上传
+
+```bash
+git status
+git add .
+git commit -m "我的修改说明"
+git push -u origin my-change
+```
+
+### 7. 发起 Pull Request
+
+回到自己的 GitHub Fork 页面，点击 **Compare & pull request**，填写修改说明，再点击 **Create pull request**。
+
+等待作者审核即可。后续如果还要修改，就在同一个分支继续执行 `git add .`、`git commit` 和 `git push`。
+
+**注意：** 不要提交密码、密钥、客户资料、真实项目文件、个人信息或本机路径。提交前请阅读 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
 ## 许可证
 
