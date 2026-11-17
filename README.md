@@ -189,6 +189,7 @@ python3 scripts/auto_run.py --help
 欢迎通过 Issue、Discussion 和 Pull Request 改进本 skill。外部贡献者请在 Fork 中修改并发起 PR，维护者审核通过后合并；`main` 分支不接受未经审核的直接推送。
 
 - 贡献流程与本地验证要求见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
+- 第一次使用 GitHub 或需要完整的 Fork、分支、PR 教程，请阅读 [`docs/github-contribution-tutorial.md`](docs/github-contribution-tutorial.md)。
 - 提交前请运行 `python3 scripts/validate_skill.py`。
 - 安全问题、密钥泄露或敏感数据风险请按 [`SECURITY.md`](SECURITY.md) 私下报告。
 - 参与讨论即表示同意遵守 [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)。
