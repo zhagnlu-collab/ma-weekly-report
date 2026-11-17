@@ -6,6 +6,20 @@
 
 > 本项目是个人工作流与研发成果，不代表任何机构的官方口径或法律意见。自动生成的成果均应按 `SKILL.md` 中的质量门禁复核，不得未经复核直接对外发布。
 
+## MCP 与数据能力
+
+**Wind MCP 与同花顺 iFinD MCP 至少配置一套，推荐双配交叉验证；见微公告检索可选。**
+
+| 数据源 | 用途 | 对应 Skill |
+|---|---|---|
+| [Wind MCP](https://aifinmarket.wind.com.cn) | 行情、市值、行业、财务及公司资料 | `wind-mcp-skill` |
+| [同花顺 iFinD MCP](https://mcp.51ifind.com/#/profile) | 行情、行业、公司资料及公告资讯 | `ifind-finance-data` |
+| [见微数据](https://www.jianweidata.com)（可选） | 公告全文与披露细节补充核验 | `jianwei-agent-search` |
+
+上述服务需自行配置账号及授权，不包含在本仓库中。连接后先做一次只读查询，确认可用；密钥勿提交到仓库。
+
+交易所、巨潮和证监会公开信息可通过脚本或浏览器查询，无须专用 MCP。关键事实须回到公告或官方页面核验。
+
 ## 修改教程：先 Fork，再 clone 自己的 Fork
 
 **先 Fork，再 clone 自己的 Fork，是提交修改最简单、最不容易出错的流程。**
@@ -77,60 +91,6 @@ git push -u origin my-change
 填写修改说明，点击 **Create pull request**，等待作者审核。后续需要补改时，在同一分支继续修改，再执行 `git add .`、`git commit` 和 `git push`，同一个 PR 会随之更新。
 
 **提交前：** 不要提交密码、密钥、客户资料、真实项目文件、个人信息或本机路径；请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。流程可参阅 [GitHub 官方贡献教程](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)。
-
-## MCP 与数据能力
-
-本 skill 的完整数据处理链需要金融数据 MCP。**不是所有 MCP 都必须安装**，至少按下表配置一套核心数据源。Codex 中可分别通过 `wind-mcp-skill`、`ifind-finance-data` 和 `jianwei-agent-search` 接入 Wind、同花顺 iFinD 与见微能力；这些外部组件不包含在本仓库中。
-
-| 优先级 | MCP / 数据组件 | 必要性 | 主要用途 |
-|---|---|---|---|
-| 1 | **Wind MCP** | 核心，二选一 | 行情、收盘价、市值、Wind/中上协/证监会行业、注册资本、主营业务、财务与公司资料 |
-| 1 | **同花顺 iFinD MCP** | 核心，二选一 | 行情、市值、行业、注册资本、主营业务、公司资料与公告资讯 |
-| 2 | **见微公告检索** | 推荐，可选 | 公告全文、权益变动报告书、股权结构、注册资本和主营业务补充核验 |
-| 3 | **交易所项目查询 skills** | 可选 | 复用上交所、深交所、北交所项目动态的公开查询能力；没有时可通过官网或通用网页访问完成 |
-| 4 | **Computer Use / 浏览器控制** | 可选增强 | 网页改版、登录态受限页面补查，以及 Microsoft Office 原生 PDF 导出 |
-
-### 1. Wind MCP
-
-适合需要 Wind 分类体系、证券基本资料、行情和历史数据的场景。建议配置以下能力：
-
-- 证券搜索与基本资料；
-- 股票行情、收盘价、市值；
-- Wind 一级至四级行业；
-- 中上协、证监会行业分类；
-- 注册资本、主营业务、财务和股东信息。
-
-Wind MCP 的账号、授权、额度和调用方式以 [Wind 官方 MCP 服务](https://aifinmarket.wind.com.cn)说明为准。使用前先在当前 Codex 环境中确认 MCP 已连接，并实际调用一次证券查询验证权限。
-
-### 2. 同花顺 iFinD MCP
-
-可作为 Wind MCP 的替代或交叉验证渠道，主要使用股票资料、行情、行业和公告资讯能力。常用字段包括：
-
-- `get_stock_info`：注册资本、主营业务等；
-- `get_stock_summary`：公司概况；
-- 行情、市值和行业分类数据；
-- 公司公告与新闻检索。
-
-首次使用通常需要在 [iFinD MCP 官网](https://mcp.51ifind.com/#/profile)的“个人中心－密钥”页面获取 MCP 密钥，并按对应 skill 的配置要求保存。密钥属于个人凭证，不应提交到本仓库，也不应写入周报或日志。
-
-### 3. 见微公告检索（可选）
-
-当 Wind / iFinD 没有返回所需字段时，可使用见微数据检索公告全文、简式权益变动报告书、股权结构、注册资本和主营业务。该能力在常见 Codex 环境中以 `jianwei-agent-search` skill/API 的形式接入，需要用户自己的 [见微数据](https://www.jianweidata.com) ApiKey。
-
-如果只使用公开交易所网站和巨潮公告，也可以不安装见微，但部分字段可能需要更多人工核验，并会在质量门禁中标记为待核或覆盖不足。
-
-### 不需要额外 MCP 的公开来源
-
-以下来源由 skill 自带脚本直接访问或通过浏览器核验，不要求安装专用 MCP：
-
-- [上交所并购重组项目动态及会议公告](https://www.sse.com.cn/listing/renewal/ma/)；
-- [深交所重组项目动态](https://www.szse.cn/listing/projectdynamic/reproperty/index.html)；
-- [北交所重大资产重组项目动态](https://www.bse.cn/audit/t_project_news_r.html)；
-- [巨潮资讯公告](https://www.cninfo.com.cn/)；
-- [证监会并购重组注册信息](https://www.csrc.gov.cn/)。
-
-搜索引擎、微信公众号和新闻页面只能用于发现线索，关键金额、比例、主体、控制权及日期必须回到公告或官方页面核验。
-
 
 ## 适用场景
 
