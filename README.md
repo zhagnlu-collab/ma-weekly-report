@@ -16,6 +16,42 @@
 
 交易所、巨潮和证监会公开信息可通过脚本或浏览器查询，无须专用 MCP。关键事实须回到公告或官方页面核验。
 
+## 安装
+
+### 1. 安装 skill
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/zhagnlu-collab/ma-weekly-report.git \
+  ~/.codex/skills/ma-weekly-report
+```
+
+也可以在 Codex 中直接打开本仓库目录使用。
+
+### 2. 安装 Python 依赖
+
+建议使用 Python 3.12 左右版本：
+
+```bash
+python3 -m pip install \
+  openpyxl python-docx python-pptx pypdf pdfplumber PyMuPDF lxml
+```
+
+### 3. 配置文档与 PDF 工具
+
+- 正式 Office 导出优先使用 Microsoft Word、Excel、PowerPoint。
+- LibreOffice 可用于格式转换和预览，不作为正式发布版的唯一判定工具。
+- PDF 逐页渲染检查需要 Poppler 的 `pdftoppm`，并应确保其位于 `PATH` 中。
+
+### 4. 配置 MCP
+
+在 Codex 的 MCP / 连接器设置中完成以下至少一套配置：
+
+1. Wind MCP；或
+2. 同花顺 iFinD MCP。
+
+如需提高公告检索覆盖率，再配置见微公告检索。配置完成后，建议先运行一次只读股票查询，确认认证、权限和额度正常。
+
 ## 修改教程：先 Fork，再 clone 自己的 Fork
 
 **先 Fork，再 clone 自己的 Fork，是提交修改最简单、最不容易出错的流程。**
@@ -87,39 +123,3 @@ git push -u origin my-change
 填写修改说明，点击 **Create pull request**，等待作者审核。后续需要补改时，在同一分支继续修改，再执行 `git add .`、`git commit` 和 `git push`，同一个 PR 会随之更新。
 
 **提交前：** 不要提交密码、密钥、客户资料、真实项目文件、个人信息或本机路径；请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。流程可参阅 [GitHub 官方贡献教程](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)。
-
-## 安装
-
-### 1. 安装 skill
-
-```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/zhagnlu-collab/ma-weekly-report.git \
-  ~/.codex/skills/ma-weekly-report
-```
-
-也可以在 Codex 中直接打开本仓库目录使用。
-
-### 2. 安装 Python 依赖
-
-建议使用 Python 3.12 左右版本：
-
-```bash
-python3 -m pip install \
-  openpyxl python-docx python-pptx pypdf pdfplumber PyMuPDF lxml
-```
-
-### 3. 配置文档与 PDF 工具
-
-- 正式 Office 导出优先使用 Microsoft Word、Excel、PowerPoint。
-- LibreOffice 可用于格式转换和预览，不作为正式发布版的唯一判定工具。
-- PDF 逐页渲染检查需要 Poppler 的 `pdftoppm`，并应确保其位于 `PATH` 中。
-
-### 4. 配置 MCP
-
-在 Codex 的 MCP / 连接器设置中完成以下至少一套配置：
-
-1. Wind MCP；或
-2. 同花顺 iFinD MCP。
-
-如需提高公告检索覆盖率，再配置见微公告检索。配置完成后，建议先运行一次只读股票查询，确认认证、权限和额度正常。
