@@ -1,6 +1,6 @@
 # ma-weekly-report
 
-面向 A 股并购重组周报编制的 Codex Skill（v4.5.16），支持按统计截止日采集数据、更新底表并生成 Word/PDF/PPT，具体规则以 [SKILL.md](SKILL.md) 为准，成果须经复核后使用，不代表任何机构的官方口径或法律意见。
+面向 A 股并购重组周报编制的 Codex Skill（v4.5.17），支持按统计截止日采集数据、更新底表并生成 Word/PDF/PPT，具体规则以 [SKILL.md](SKILL.md) 为准，成果须经复核后使用，不代表任何机构的官方口径或法律意见。
 
 ## MCP 与数据能力
 
